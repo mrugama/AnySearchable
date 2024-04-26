@@ -9,14 +9,14 @@ import SwiftUI
 
 struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
    
-   var screenTitle: String = "Title"
+   var screenTitle: String
    var lightImageResource: ImageResource = .defaultIcon
    var darkImageResource: ImageResource = .defaultIcon
    
     var items: [Item]
    @Binding var selectedItem: any AnySearchableItem
     
-    private var filteredDatasource: [Item] {
+    private var filteredItems: [Item] {
         if searchText.isEmpty {
             items
         } else {
@@ -28,7 +28,7 @@ struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
    @Environment(\.dismiss) private var dismiss
    @Environment(\.presentationMode) var presentationMode
    
-   @State var searchText = ""
+   @State private var searchText = ""
    
    var body: some View {
       VStack {
@@ -108,7 +108,7 @@ private extension SearchContentView {
          
          ScrollView(.vertical, showsIndicators: false) {
             VStack(spacing: 10) {
-               ForEach(filteredDatasource) { item in
+               ForEach(filteredItems) { item in
                   Button(action: {
                      selectedItem = item
                      handleDismiss()

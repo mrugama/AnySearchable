@@ -104,9 +104,9 @@ In this updated version:
 - The NoneSelectedItem struct conforms to the AnySearchableItem protocol, providing an id and an itemName. It represents the case when no item is selected.
 - When navigating to the search view, you can replace the selectedItem property with one of the concrete types of bills, providers, or plans based on user selection.
 
-## User interface
+## User Interface
 
-### Parent view (Electricity bill)
+### Parent View (Electricity bill)
 In the ElectricityBillView, which houses the dropdown rows, we need to display all the rows and hold a reference to the PaymentViewModel. Here's how you can define the ElectricityBillView:
 ```Swift
 struct ElectricityBillView: View {
@@ -124,7 +124,7 @@ In this code snippet:
 - Inside the body property, you can add the code to display the dropdown rows.
 
 
-### Dropdown row
+### Dropdown Row
 Here's how you can implement the DropdownRowView struct to display the dropdown row and navigate to the SearchContentView
 ```Swift
 import SwiftUI
@@ -179,13 +179,13 @@ struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.presentationMode) var presentationMode
     
-    var screenTitle: String = "Title"
+    var screenTitle: String
     var items: [Item]
     @Binding var selectedItem: AnySearchableItem?
 
     @State private var searchText: String = ""
 
-    private var filteredDatasource: [Item] {
+    private var filteredItems: [Item] {
         if searchText.isEmpty {
             return items
         } else {
