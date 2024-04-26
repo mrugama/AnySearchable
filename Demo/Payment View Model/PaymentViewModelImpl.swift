@@ -59,43 +59,4 @@ final class PaymentViewModelImpl: IPaymentViewModel, ObservableObject {
             ElectricityPlan(name: "Plan Eight"),
         ]
     }
-    
-    func paymentActionNavLinks(selection: Binding<Action?>) -> some View {
-        Group {
-            NavigationLink(
-                destination: Text("Withdraw"),
-                tag: Action.withdraw,
-                selection: selection,
-                label: { EmptyView() }
-            )
-            
-            NavigationLink(
-                destination: Text("Swap"),
-                tag: Action.swap,
-                selection: selection,
-                label: { EmptyView() }
-            )
-            
-            NavigationLink(
-                destination: Text("Recharge"),
-                tag: Action.recharge,
-                selection: selection,
-                label: { EmptyView() }
-            )
-            
-            NavigationLink(
-                destination: ElectricityBillView(viewModel: self),
-                tag: Action.electricity,
-                selection: selection,
-                label: { EmptyView() }
-            )
-            
-            NavigationLink(
-                destination: Text("Cable TV"),
-                tag: Action.cableTV,
-                selection: selection,
-                label: { EmptyView() }
-            )
-        }
-    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum Action: CaseIterable {
+enum Action: CaseIterable, Hashable {
    case withdraw
    case swap
    case recharge
