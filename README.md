@@ -45,7 +45,7 @@ The search view needs to be agnostic to data types. Our approach involves creati
 
 Protocol
 ```Swift
-protocol AnyItemSearchable {
+protocol AnySearchableItem {
    var id: String { get }
    var itemName: String { get }
 }
@@ -56,7 +56,7 @@ We've defined a protocol called `AnySearchableItem`, specifying requirements for
 
 Let's extend our models and conform them to `AnySearchableItem`
 ```Swift
-extension ElectricityBill: AnySearchableItem, Identifiable, Equatable {
+extension ElectricityBill: AnySearchableItem, Identifiable {
     var id: String { UUID().uuidString }
     var itemName: String {
         if planType == .prepaid {
@@ -67,18 +67,18 @@ extension ElectricityBill: AnySearchableItem, Identifiable, Equatable {
     }
 }
 
-extension ElectricityProvider: AnySearchableItem, Identifiable, Equatable {
+extension ElectricityProvider: AnySearchableItem, Identifiable {
    var id: String { UUID().uuidString }
    var itemName: String { name }
 }
 
-extension ElectricityPlan: AnySearchableItem, Identifiable, Equatable {
+extension ElectricityPlan: AnySearchableItem, Identifiable {
    var id: String { UUID().uuidString }
    var itemName: String { name }
 }
 ```
 
-We conform the models to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view, and to `Equatable` to compare and filter our elements.
+We conform the models to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view.
 
 ### ViewModel
 To manage the array of bills, providers, and plans, as well as the selected item to be displayed in the parent view, we'll introduce a new model called `NoneSelectedItem`. This model will be used initially before any item is selected. Here's how we can modify the PaymentViewModel class
@@ -129,7 +129,7 @@ Here's how you can implement the DropdownRowView struct to display the dropdown 
 ```Swift
 import SwiftUI
 
-struct DropdownRowView<Item: AnySearchableItem & Identifiable & Equatable>: View {
+struct DropdownRowView<Item: AnySearchableItem & Identifiable>: View {
     var screenTitle: String
     var items: [Item]
     @Binding var selectedItem: AnySearchableItem?

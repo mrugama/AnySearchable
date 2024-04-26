@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DropdownRowView<Item: AnySearchableItem & Identifiable & Equatable>: View {
+struct DropdownRowView<Item: AnySearchableItem & Identifiable>: View {
     
     var screenTitle: String
     var items: [Item]

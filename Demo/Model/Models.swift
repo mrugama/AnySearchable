@@ -98,7 +98,7 @@ struct ElectricityProvider {
    var name: String
 }
 
-extension ElectricityProvider: AnySearchableItem, Identifiable, Equatable {
+extension ElectricityProvider: AnySearchableItem, Identifiable {
    var id: String { UUID().uuidString }
    var itemName: String { name }
 }
@@ -107,7 +107,7 @@ struct ElectricityPlan {
    var name: String
 }
 
-extension ElectricityPlan: AnySearchableItem, Identifiable, Equatable {
+extension ElectricityPlan: AnySearchableItem, Identifiable {
    var id: String { UUID().uuidString }
    var itemName: String { name }
 }
@@ -116,7 +116,7 @@ struct noneSelectedItem {
     var name: String
 }
 
-extension noneSelectedItem: AnySearchableItem, Identifiable, Equatable {
+extension noneSelectedItem: AnySearchableItem, Identifiable {
     var id: String { UUID().uuidString }
     private(set) var itemName: String {
        get { name }
