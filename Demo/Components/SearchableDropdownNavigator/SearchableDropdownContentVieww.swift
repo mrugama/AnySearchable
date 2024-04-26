@@ -97,7 +97,7 @@ private extension SearchableDropdownContentVieww {
             .padding(8)
             .background(Color.orange)
             .clipShape(Circle())
-//            .foregroundStyle(.white)
+            .foregroundStyle(.white)
          }
       }
    }

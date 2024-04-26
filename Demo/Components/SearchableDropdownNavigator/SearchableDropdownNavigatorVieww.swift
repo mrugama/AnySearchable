@@ -34,10 +34,26 @@ struct SearchableDropdownNavigatorVieww<T: AnyItemSearchable & Identifiable & Eq
             }
             .padding()
             .background(Color.secondary.opacity(0.1))
+            .clipShape(
+                RoundedRectangle(cornerRadius: 10)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2.0)
+            }
         }
     }
 }
 
-//#Preview {
-//   SearchableDropdownNavigatorVieww<T: AnyItemSearchable>()
-//}
+#Preview {
+    SearchableDropdownNavigatorVieww(
+        screenTitle: "Option",
+        datasource: [
+            ElectricityBill(
+                name: "Electricity",
+                number: "123",
+                planType: .prepaid)],
+        selectedItem: .constant(
+            noneSelectedItem(name: "Select a electricity bill")
+        )
+    )
+}

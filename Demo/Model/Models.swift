@@ -86,13 +86,7 @@ struct ElectricityBill {
 }
 
 extension ElectricityBill: AnyItemSearchable, Identifiable, Equatable {
-
-   typealias Item = PlanType
-   
-   var type: PlanType? { planType }
-   
    var id: String { UUID().uuidString }
-   
    private(set) var itemName: String {
       get {
          if planType == .prepaid {
@@ -113,13 +107,7 @@ struct ElectricityProvider {
 }
 
 extension ElectricityProvider: AnyItemSearchable, Identifiable, Equatable {
-   
-   typealias Item = String
-   
-   var type: String? { nil }
-   
    var id: String { UUID().uuidString }
-   
    private(set) var itemName: String {
       get { name }
       set {}
@@ -131,13 +119,7 @@ struct ElectricityPlan {
 }
 
 extension ElectricityPlan: AnyItemSearchable, Identifiable, Equatable {
-   
-   typealias Item = String
-   
-   var type: String? { nil }
-   
    var id: String { UUID().uuidString }
-   
    private(set) var itemName: String {
       get { name }
       set {}
@@ -149,12 +131,7 @@ struct noneSelectedItem {
 }
 
 extension noneSelectedItem: AnyItemSearchable, Identifiable, Equatable {
-    typealias Item = String
-    
-    var type: String? { nil }
-    
     var id: String { UUID().uuidString }
-    
     private(set) var itemName: String {
        get { name }
        set {}
