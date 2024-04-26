@@ -39,3 +39,7 @@ struct ActionButtonView: View {
       .frame(width: 70, height: 90)
    }
 }
+
+#Preview {
+    ActionButtonView(action: Action.electricity)
+}
