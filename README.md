@@ -275,10 +275,10 @@ struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
 ```
 In this implementation:
 
-The SearchContentView displays a list of items that can be filtered by a search query.
-Each item in the list is selectable, and upon selection, the selected item is sent back to the parent view and the search view is dismissed.
-The view includes a navigation bar with a back button to dismiss the search view.
-It also includes a search bar for filtering items by name.
-Additional navigation content can be added to the navContent property if needed.
-The handleDismiss() function is responsible for dismissing the search view when the user selects an item or taps the back button.
+- The SearchContentView displays a list of items that can be filtered by a search query.
+- Each item in the list is selectable, and upon selection, the selected item is sent back to the parent view and the search view is dismissed.
+- The view includes a navigation bar with a back button to dismiss the search view.
+- It also includes a search bar for filtering items by name.
+- Additional navigation content can be added to the navContent property if needed.
+- The handleDismiss() function is responsible for dismissing the search view when the user selects an item or taps the back button.
 
