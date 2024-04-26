@@ -81,7 +81,7 @@ extension ElectricityPlan: AnySearchableItem, Identifiable, Equatable {
 We conform the models to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view, and to `Equatable` to compare and filter our elements.
 
 ### ViewModel
-To manage the array of bills, providers, and plans, as well as the selected item to be displayed in the parent view, we'll introduce a new model called NoneSelectedItem. This model will be used initially before any item is selected. Here's how we can modify the PaymentViewModel class
+To manage the array of bills, providers, and plans, as well as the selected item to be displayed in the parent view, we'll introduce a new model called `NoneSelectedItem`. This model will be used initially before any item is selected. Here's how we can modify the PaymentViewModel class
 ```Swift
 final class PaymentViewModel {
     @Published var savedElectricityBills: [ElectricityBill] = []
@@ -103,3 +103,25 @@ In this updated version:
 - We define a selectedItem property in the PaymentViewModel class to hold the currently selected item. Initially, it's set to an instance of NoneSelectedItem.
 - The NoneSelectedItem struct conforms to the AnySearchableItem protocol, providing an id and an itemName. It represents the case when no item is selected.
 - When navigating to the search view, you can replace the selectedItem property with one of the concrete types of bills, providers, or plans based on user selection.
+
+## User interface
+
+### Parent view
+In the ElectricityBillView, which houses the dropdown rows, we need to display all the rows and hold a reference to the PaymentViewModel. Here's how you can define the ElectricityBillView:
+```Swift
+struct ElectricityBillView: View {
+    @ObservedObject var viewModel: PaymentViewModel
+
+    var body: some View {
+        // Display dropdown rows here
+    }
+}
+```
+In this code snippet:
+
+- We define the ElectricityBillView struct with a property viewModel of type PaymentViewModel.
+- The @ObservedObject property wrapper is used to observe changes to the viewModel object, ensuring that the view updates appropriately when the data in the view model changes.
+- Inside the body property, you can add the code to display the dropdown rows.
+
+### Search view with generic item
+
