@@ -8,10 +8,6 @@
 import Foundation
 import SwiftUI
 
-enum SelectedItem {
-    case none(title: String), bill(item: any AnySearchableItem), provider(item: any AnySearchableItem), plan(item: any AnySearchableItem)
-}
-
 final class PaymentViewModelImpl: IPaymentViewModel, ObservableObject {
     
     private let paymentRemote: IPaymentRemoteDatasource

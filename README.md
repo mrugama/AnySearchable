@@ -51,7 +51,7 @@ protocol AnyItemSearchable {
 }
 ```
 
-### Extending our models
+### Extending the models
 We've defined a protocol called `AnySearchableItem`, specifying requirements for items to be displayed in the search view. Each item must provide an id and an itemName.
 
 Let's extend our models and conform them to `AnySearchableItem`
@@ -78,4 +78,28 @@ extension ElectricityPlan: AnySearchableItem, Identifiable, Equatable {
 }
 ```
 
-We conform our `ElectricityBill` model to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view, and to `Equatable` to compare and filter our elements.
+We conform the models to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view, and to `Equatable` to compare and filter our elements.
+
+### ViewModel
+To manage the array of bills, providers, and plans, as well as the selected item to be displayed in the parent view, we'll introduce a new model called NoneSelectedItem. This model will be used initially before any item is selected. Here's how we can modify the PaymentViewModel class
+```Swift
+final class PaymentViewModel {
+    @Published var savedElectricityBills: [ElectricityBill] = []
+    @Published var electricityProviders: [ElectricityProvider] = []
+    @Published var electricityPlans: [ElectricityPlan] = []
+
+    @Published var selectedSavedElectricityBill: any AnySearchableItem = noneSelectedItem(name: "Saved Bills")
+    @Published var selectedElectricityProvider: any AnySearchableItem = noneSelectedItem(name: "Select a provider")
+    @Published var selectedElectricityPlan: any AnySearchableItem = noneSelectedItem(name: "Select plan")
+}
+
+struct NoneSelectedItem: AnySearchableItem {
+    var id: String { UUID().uuidString }
+    var itemName: String
+}
+```
+In this updated version:
+
+- We define a selectedItem property in the PaymentViewModel class to hold the currently selected item. Initially, it's set to an instance of NoneSelectedItem.
+- The NoneSelectedItem struct conforms to the AnySearchableItem protocol, providing an id and an itemName. It represents the case when no item is selected.
+- When navigating to the search view, you can replace the selectedItem property with one of the concrete types of bills, providers, or plans based on user selection.
