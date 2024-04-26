@@ -78,7 +78,7 @@ extension ElectricityPlan: AnySearchableItem, Identifiable {
 }
 ```
 
-We conform the models to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view.
+We conform the models to `AnySearchableItem`, `Identifiable`. We need to conform to `Identifiable` to display our data in a list view.
 
 ### ViewModel
 To manage the array of bills, providers, and plans, as well as the selected item to be displayed in the parent view, we'll introduce a new model called `NoneSelectedItem`. This model will be used initially before any item is selected. Here's how we can modify the PaymentViewModel class
