@@ -62,10 +62,9 @@ struct PayHomeView: View {
                   
                   // MARK: - Actions
                   ActionsGridView(viewModel: self.viewModel)
-                     .padding(.horizontal, 30)
+                     .padding(.horizontal, 8)
                }
             }
-            .padding(.horizontal, 10)
          }
       }
    }

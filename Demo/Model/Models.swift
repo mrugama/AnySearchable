@@ -30,20 +30,18 @@ enum Action: CaseIterable {
       }
    }
    
-   var image: ImageResource {
+   var image: Image {
       switch self {
-//      case .withdraw:
-//         return .withdrawIcon
-//      case .swap:
-//         return .swapIcon
-//      case .recharge:
-//         return .rechargeIcon
-//      case .electricity:
-//         return .electricityIcon
-//      case .cableTV:
-//         return .cableTvIcon
-      default:
-         return .defaultIcon
+      case .withdraw:
+         return Image(systemName: "dollarsign")
+      case .swap:
+         return Image(systemName: "rectangle.2.swap")
+      case .recharge:
+         return Image(systemName: "gobackward")
+      case .electricity:
+         return Image(systemName: "bolt")
+      case .cableTV:
+         return Image(systemName: "tv")
       }
    }
    

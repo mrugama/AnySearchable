@@ -18,7 +18,7 @@ struct ActionButtonView: View {
                Circle()
                   .strokeBorder(action.stroke, lineWidth: 0.6)
                
-               Image(action.image)
+               action.image
                   .renderingMode(.template)
                   .resizable()
                   .tint(action.tint)
