@@ -10,6 +10,8 @@ While it's feasible to create a separate search view for each row, it's advisabl
 ## Solution
 When a user taps on a row, it triggers a network request to fetch data. Each row corresponds to a different data point, resulting in distinct data types for each row. Below are sample data types for the three different rows.
 
+### Modeling data
+
 Electricity bill:
 ```Swift
 struct ElectricityBill {
@@ -38,6 +40,7 @@ struct ElectricityPlan {
 }
 ```
 
+### Defining protocol
 The search view needs to be agnostic to data types. Our approach involves creating a protocol where we define the requirements for items to be displayed in the search view for any item.
 
 Protocol
@@ -48,9 +51,10 @@ protocol AnyItemSearchable {
 }
 ```
 
-We've defined a protocol called AnySearchableItem, specifying requirements for items to be displayed in the search view. Each item must provide an id and an itemName.
+### Extending our models
+We've defined a protocol called `AnySearchableItem`, specifying requirements for items to be displayed in the search view. Each item must provide an id and an itemName.
 
-Let's extend our models and conform them to AnySearchableItem:
+Let's extend our models and conform them to `AnySearchableItem`
 ```Swift
 extension ElectricityBill: AnySearchableItem, Identifiable, Equatable {
     var id: String { UUID().uuidString }
