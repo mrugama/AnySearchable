@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 enum SelectedItem {
-    case none(title: String), bill(item: any AnyItemSearchable), provider(item: any AnyItemSearchable), plan(item: any AnyItemSearchable)
+    case none(title: String), bill(item: any AnySearchableItem), provider(item: any AnySearchableItem), plan(item: any AnySearchableItem)
 }
 
 final class PaymentViewModelImpl: IPaymentViewModel, ObservableObject {
@@ -21,9 +21,9 @@ final class PaymentViewModelImpl: IPaymentViewModel, ObservableObject {
     }
     
     @Published var action: Action?
-    @Published var selectedSavedElectricityBill: any AnyItemSearchable = noneSelectedItem(name: "Saved Bills")
-    @Published var selectedElectricityProvider: any AnyItemSearchable = noneSelectedItem(name: "Select a provider")
-    @Published var selectedElectricityPlan: any AnyItemSearchable = noneSelectedItem(name: "Select plan")
+    @Published var selectedSavedElectricityBill: any AnySearchableItem = noneSelectedItem(name: "Saved Bills")
+    @Published var selectedElectricityProvider: any AnySearchableItem = noneSelectedItem(name: "Select a provider")
+    @Published var selectedElectricityPlan: any AnySearchableItem = noneSelectedItem(name: "Select plan")
     @Published var savedElectricityBills: [ElectricityBill] = []
     @Published var electricityProviders: [ElectricityProvider] = []
     @Published var electricityPlans: [ElectricityPlan] = []

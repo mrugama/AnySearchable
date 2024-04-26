@@ -39,3 +39,39 @@ struct ElectricityPlan {
 ```
 
 The search view needs to be agnostic to data types. Our approach involves creating a protocol where we define the requirements for items to be displayed in the search view for any item.
+
+Protocol
+```Swift
+protocol AnyItemSearchable {
+   var id: String { get }
+   var itemName: String { get }
+}
+```
+
+We've defined a protocol called AnySearchableItem, specifying requirements for items to be displayed in the search view. Each item must provide an id and an itemName.
+
+Let's extend our models and conform them to AnySearchableItem:
+```Swift
+extension ElectricityBill: AnySearchableItem, Identifiable, Equatable {
+    var id: String { UUID().uuidString }
+    var itemName: String {
+        if planType == .prepaid {
+            return "\(name) (\(planType.rawValue.capitalized))"
+        } else {
+            return name
+        }
+    }
+}
+
+extension ElectricityProvider: AnySearchableItem, Identifiable, Equatable {
+   var id: String { UUID().uuidString }
+   var itemName: String { name }
+}
+
+extension ElectricityPlan: AnySearchableItem, Identifiable, Equatable {
+   var id: String { UUID().uuidString }
+   var itemName: String { name }
+}
+```
+
+We conform our `ElectricityBill` model to `AnySearchableItem`, `Identifiable`, and `Equatable`. We need to conform to `Identifiable` to display our data in a list view, and to `Equatable` to compare and filter our elements.

@@ -85,20 +85,14 @@ struct ElectricityBill {
    }
 }
 
-extension ElectricityBill: AnyItemSearchable, Identifiable, Equatable {
+extension ElectricityBill: AnySearchableItem, Identifiable, Equatable {
    var id: String { UUID().uuidString }
-   private(set) var itemName: String {
-      get {
-         if planType == .prepaid {
-            "\(name) (\(planType.rawValue.capitalized))"
-         } else {
-            name
-         }
-      }
-      
-      set {
-         
-      }
+   var itemName: String {
+       if planType == .prepaid {
+           return "\(name) (\(planType.rawValue.capitalized))"
+       } else {
+           return name
+       }
    }
 }
 
@@ -106,31 +100,25 @@ struct ElectricityProvider {
    var name: String
 }
 
-extension ElectricityProvider: AnyItemSearchable, Identifiable, Equatable {
+extension ElectricityProvider: AnySearchableItem, Identifiable, Equatable {
    var id: String { UUID().uuidString }
-   private(set) var itemName: String {
-      get { name }
-      set {}
-   }
+   var itemName: String { name }
 }
 
 struct ElectricityPlan {
    var name: String
 }
 
-extension ElectricityPlan: AnyItemSearchable, Identifiable, Equatable {
+extension ElectricityPlan: AnySearchableItem, Identifiable, Equatable {
    var id: String { UUID().uuidString }
-   private(set) var itemName: String {
-      get { name }
-      set {}
-   }
+   var itemName: String { name }
 }
 
 struct noneSelectedItem {
     var name: String
 }
 
-extension noneSelectedItem: AnyItemSearchable, Identifiable, Equatable {
+extension noneSelectedItem: AnySearchableItem, Identifiable, Equatable {
     var id: String { UUID().uuidString }
     private(set) var itemName: String {
        get { name }

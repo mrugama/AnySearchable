@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol AnyItemSearchable {
+protocol AnySearchableItem {
    var id: String { get }
    var itemName: String { get }
 }

@@ -18,7 +18,7 @@
 		FAB2E4C72BDAA4B900E7BA70 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4C62BDAA4B900E7BA70 /* Models.swift */; };
 		FAB2E4C92BDAA63000E7BA70 /* ElectricityBillView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4C82BDAA62F00E7BA70 /* ElectricityBillView.swift */; };
 		FAB2E4CB2BDAA69800E7BA70 /* SearchableDropdownNavigatorVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4CA2BDAA69800E7BA70 /* SearchableDropdownNavigatorVieww.swift */; };
-		FAB2E4CD2BDAA6D700E7BA70 /* AnyItemSearchable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4CC2BDAA6D700E7BA70 /* AnyItemSearchable.swift */; };
+		FAB2E4CD2BDAA6D700E7BA70 /* AnySearchableItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4CC2BDAA6D700E7BA70 /* AnySearchableItem.swift */; };
 		FAB2E4CF2BDAA6FC00E7BA70 /* SearchableDropdownContentVieww.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4CE2BDAA6FC00E7BA70 /* SearchableDropdownContentVieww.swift */; };
 		FAB2E4D12BDAA76A00E7BA70 /* SearchBarTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4D02BDAA76A00E7BA70 /* SearchBarTextField.swift */; };
 		FAB2E4D32BDAA79900E7BA70 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4D22BDAA79900E7BA70 /* View+.swift */; };
@@ -49,7 +49,7 @@
 		FAB2E4C62BDAA4B900E7BA70 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		FAB2E4C82BDAA62F00E7BA70 /* ElectricityBillView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElectricityBillView.swift; sourceTree = "<group>"; };
 		FAB2E4CA2BDAA69800E7BA70 /* SearchableDropdownNavigatorVieww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableDropdownNavigatorVieww.swift; sourceTree = "<group>"; };
-		FAB2E4CC2BDAA6D700E7BA70 /* AnyItemSearchable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyItemSearchable.swift; sourceTree = "<group>"; };
+		FAB2E4CC2BDAA6D700E7BA70 /* AnySearchableItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnySearchableItem.swift; sourceTree = "<group>"; };
 		FAB2E4CE2BDAA6FC00E7BA70 /* SearchableDropdownContentVieww.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchableDropdownContentVieww.swift; sourceTree = "<group>"; };
 		FAB2E4D02BDAA76A00E7BA70 /* SearchBarTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarTextField.swift; sourceTree = "<group>"; };
 		FAB2E4D22BDAA79900E7BA70 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
@@ -194,7 +194,7 @@
 		FAB2E4EF2BDAAE7400E7BA70 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				FAB2E4CC2BDAA6D700E7BA70 /* AnyItemSearchable.swift */,
+				FAB2E4CC2BDAA6D700E7BA70 /* AnySearchableItem.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -287,7 +287,7 @@
 				FAB2E4DB2BDAA9FA00E7BA70 /* PaymentRemoteDatasourceImpl.swift in Sources */,
 				FAB2E4D92BDAA96A00E7BA70 /* BaseButton.swift in Sources */,
 				FAB2E4C12BDAA29A00E7BA70 /* PaymentViewModelImpl.swift in Sources */,
-				FAB2E4CD2BDAA6D700E7BA70 /* AnyItemSearchable.swift in Sources */,
+				FAB2E4CD2BDAA6D700E7BA70 /* AnySearchableItem.swift in Sources */,
 				FAB2E4CB2BDAA69800E7BA70 /* SearchableDropdownNavigatorVieww.swift in Sources */,
 				FAB2E4D72BDAA83500E7BA70 /* RoundedShape.swift in Sources */,
 				FAB2E4E12BDAAA7F00E7BA70 /* HTTPMethod.swift in Sources */,

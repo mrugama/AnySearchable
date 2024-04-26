@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchableDropdownContentVieww<T: AnyItemSearchable & Identifiable>: View {
+struct SearchableDropdownContentVieww<T: AnySearchableItem & Identifiable>: View {
    
    var screenTitle: String = "Title"
    var title: String = "Select an Item"
@@ -15,7 +15,7 @@ struct SearchableDropdownContentVieww<T: AnyItemSearchable & Identifiable>: View
    var darkImageResource: ImageResource = .defaultIcon
    
     var datasource: [T]
-   @Binding var selectedItem: any AnyItemSearchable
+   @Binding var selectedItem: any AnySearchableItem
     
     private var filteredDatasource: [T] {
         if searchText.isEmpty {
