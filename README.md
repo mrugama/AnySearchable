@@ -6,8 +6,9 @@ While it's feasible to create a separate search view for each row, it's advisabl
 
 ## Design 
 <img width="439" alt="Screenshot 2024-04-25 at 4 54 29 PM" src="https://github.com/emmanuelkolawole4/Demo/assets/50505707/367b473d-09c3-4f34-9611-6446b0be1c4b">
+
 ## Solution
-When a user taps on a row, it triggers a network request to fetch data. Each row corresponds to a different data point, resulting in distinct data types for each row. Below are sample data types for the three different rows:
+When a user taps on a row, it triggers a network request to fetch data. Each row corresponds to a different data point, resulting in distinct data types for each row. Below are sample data types for the three different rows.
 
 Electricity bill:
 ```Swift
@@ -21,8 +22,9 @@ struct ElectricityBill {
     }
 }
 
-Electricity provider:
 ```
+
+Electricity provider:
 ```Swift
 struct ElectricityProvider {
     var name: String
