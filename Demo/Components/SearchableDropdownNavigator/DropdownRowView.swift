@@ -7,19 +7,18 @@
 
 import SwiftUI
 
-struct SearchableDropdownNavigatorVieww<T: AnySearchableItem & Identifiable & Equatable>: View {
-
-    var screenTitle = "Option"
-    var datasource: [T]
+struct DropdownRowView<Item: AnySearchableItem & Identifiable & Equatable>: View {
+    
+    var screenTitle: String
+    var items: [Item]
     
     @Binding var selectedItem: any AnySearchableItem
     
     var body: some View {
         NavigationLink {
-            SearchableDropdownContentVieww<T>(
+            SearchContentView<Item>(
                 screenTitle: selectedItem.itemName,
-                title: screenTitle,
-                datasource: datasource,
+                items: items,
                 selectedItem: $selectedItem
             )
         } label: {
@@ -45,9 +44,9 @@ struct SearchableDropdownNavigatorVieww<T: AnySearchableItem & Identifiable & Eq
 }
 
 #Preview {
-    SearchableDropdownNavigatorVieww(
+    DropdownRowView(
         screenTitle: "Option",
-        datasource: [
+        items: [
             ElectricityBill(
                 name: "Electricity",
                 number: "123",

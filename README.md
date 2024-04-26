@@ -106,7 +106,7 @@ In this updated version:
 
 ## User interface
 
-### Parent view
+### Parent view (Electricity bill)
 In the ElectricityBillView, which houses the dropdown rows, we need to display all the rows and hold a reference to the PaymentViewModel. Here's how you can define the ElectricityBillView:
 ```Swift
 struct ElectricityBillView: View {
@@ -123,5 +123,162 @@ In this code snippet:
 - The @ObservedObject property wrapper is used to observe changes to the viewModel object, ensuring that the view updates appropriately when the data in the view model changes.
 - Inside the body property, you can add the code to display the dropdown rows.
 
+
+### Dropdown row
+Here's how you can implement the DropdownRowView struct to display the dropdown row and navigate to the SearchContentView
+```Swift
+import SwiftUI
+
+struct DropdownRowView<Item: AnySearchableItem & Identifiable & Equatable>: View {
+    var screenTitle: String
+    var items: [Item]
+    @Binding var selectedItem: AnySearchableItem?
+
+    var body: some View {
+        NavigationLink {
+            SearchContentView<Item>(
+                screenTitle: selectedItem.itemName,
+                title: screenTitle,
+                items: items,
+                selectedItem: $selectedItem
+            )
+        } label: {
+            HStack {
+                Text(selectedItem.itemName)
+                    .foregroundStyle(Color.primary)
+                
+                Spacer()
+                
+                Image(systemName: "chevron.down")
+                    .foregroundColor(.primary)
+            }
+            .padding()
+            .background(Color.secondary.opacity(0.1))
+            .clipShape(
+                RoundedRectangle(cornerRadius: 10)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2.0)
+            }
+        }
+    }
+}
+
+```
+In this code:
+
+We use a NavigationLink to navigate to the SearchContentView when the user taps on the dropdown row.
+The SearchContentView requires a binding to the selectedItem property so that it can update the selected item based on user interaction.
+The selectedItem property is bound to the DropdownRowView, allowing it to display the currently selected item and update it when a new item is selected in the search view.
+
 ### Search view with generic item
+```Swift
+import SwiftUI
+
+struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.presentationMode) var presentationMode
+    
+    var screenTitle: String = "Title"
+    var items: [Item]
+    @Binding var selectedItem: AnySearchableItem?
+
+    @State private var searchText: String = ""
+
+    private var filteredDatasource: [Item] {
+        if searchText.isEmpty {
+            return items
+        } else {
+            return items.filter { $0.itemName.localizedCaseInsensitiveContains(searchText) }
+        }
+    }
+
+    var body: some View {
+        VStack {
+            ZStack(alignment: .top) {
+                navBar
+                    .ignoresSafeArea(edges: .top)
+                    .frame(height: UIScreen.main.bounds.height * 0.15)
+
+                VStack {
+                    navContent
+                        .padding(EdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 15))
+
+                    mainView
+                }
+            }
+        }
+        .background(Color.white)
+        .navigationBarHidden(true)
+    }
+
+    var mainView: some View {
+        VStack(alignment: .leading) {
+            SearchBarTextField(text: $searchText)
+                .padding(.vertical)
+
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 10) {
+                    ForEach(filteredDatasource) { item in
+                        Button(action: {
+                            selectedItem = item
+                            handleDismiss()
+                        }) {
+                            SearchableDropdownContentItemView(itemName: item.itemName)
+                        }
+                    }
+                }
+            }
+        }
+        .padding()
+        .background(
+            Color.white
+                .ignoresSafeArea()
+        )
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+    }
+
+    private var navBar: some View {
+        VStack {
+            HStack {
+                Button(action: {
+                    handleDismiss()
+                }) {
+                    Image(systemName: "chevron.backward")
+                        .foregroundColor(.black)
+                        .padding()
+                }
+
+                Spacer()
+
+                Text(screenTitle)
+                    .font(.headline)
+                    .foregroundColor(.black)
+
+                Spacer()
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .background(Color.white)
+    }
+
+    private var navContent: some View {
+        // Additional navigation content can be added here
+        EmptyView()
+    }
+
+    private func handleDismiss() {
+        dismiss()
+        presentationMode.wrappedValue.dismiss()
+    }
+}
+```
+In this implementation:
+
+The SearchContentView displays a list of items that can be filtered by a search query.
+Each item in the list is selectable, and upon selection, the selected item is sent back to the parent view and the search view is dismissed.
+The view includes a navigation bar with a back button to dismiss the search view.
+It also includes a search bar for filtering items by name.
+Additional navigation content can be added to the navContent property if needed.
+The handleDismiss() function is responsible for dismissing the search view when the user selects an item or taps the back button.
 

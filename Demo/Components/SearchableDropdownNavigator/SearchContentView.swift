@@ -7,21 +7,20 @@
 
 import SwiftUI
 
-struct SearchableDropdownContentVieww<T: AnySearchableItem & Identifiable>: View {
+struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
    
    var screenTitle: String = "Title"
-   var title: String = "Select an Item"
    var lightImageResource: ImageResource = .defaultIcon
    var darkImageResource: ImageResource = .defaultIcon
    
-    var datasource: [T]
+    var items: [Item]
    @Binding var selectedItem: any AnySearchableItem
     
-    private var filteredDatasource: [T] {
+    private var filteredDatasource: [Item] {
         if searchText.isEmpty {
-            datasource
+            items
         } else {
-            datasource.filter { $0.itemName.contains(searchText) }
+            items.filter { $0.itemName.contains(searchText) }
         }
     }
    
@@ -51,7 +50,7 @@ struct SearchableDropdownContentVieww<T: AnySearchableItem & Identifiable>: View
    }
 }
 
-private extension SearchableDropdownContentVieww {
+private extension SearchContentView {
    
    var navBar: some View {
       Rectangle()
@@ -111,7 +110,6 @@ private extension SearchableDropdownContentVieww {
             VStack(spacing: 10) {
                ForEach(filteredDatasource) { item in
                   Button(action: {
-//                     i think this is where i want to be able to send what i selected back to the previous view, and go back automatically
                      selectedItem = item
                      handleDismiss()
                   }) {
@@ -156,10 +154,9 @@ private extension SearchableDropdownContentVieww {
 }
 
 #Preview(traits: .sizeThatFitsLayout) {
-   SearchableDropdownContentVieww<ElectricityBill>(
+   SearchContentView<ElectricityBill>(
       screenTitle: "Provider",
-      title: "AEDC Prepaid",
-      datasource: [
+      items: [
         ElectricityBill(name: "AEDC", number: "7023658921", planType: .prepaid),
         ElectricityBill(name: "Jos Electricity", number: "7023658921", planType: .postpaid),
         ElectricityBill(name: "BEDC Electricity", number: "7023658921", planType: .prepaid),

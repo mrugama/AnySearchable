@@ -78,21 +78,21 @@ private extension ElectricityBillView {
     var mainView: some View {
         VStack(alignment: .leading, spacing: 40) {
             
-            SearchableDropdownNavigatorVieww<ElectricityBill>(
+            DropdownRowView<ElectricityBill>(
                 screenTitle: "Saved Bills",
-                datasource: viewModel.savedElectricityBills,
+                items: viewModel.savedElectricityBills,
                 selectedItem: $viewModel.selectedSavedElectricityBill
             )
             
-            SearchableDropdownNavigatorVieww<ElectricityProvider>(
+            DropdownRowView<ElectricityProvider>(
                 screenTitle: "Provider",
-                datasource: viewModel.electricityProviders,
+                items: viewModel.electricityProviders,
                 selectedItem: $viewModel.selectedElectricityProvider
             )
             
-            SearchableDropdownNavigatorVieww<ElectricityPlan>(
+            DropdownRowView<ElectricityPlan>(
                 screenTitle: "Plan",
-                datasource: viewModel.electricityPlans,
+                items: viewModel.electricityPlans,
                 selectedItem: $viewModel.selectedElectricityPlan
             )
             
