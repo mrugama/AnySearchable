@@ -31,7 +31,6 @@ struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
    @State private var searchText = ""
    
    var body: some View {
-      VStack {
          ZStack(alignment: .top) {
             navBar
                .ignoresSafeArea(edges: .top)
@@ -39,12 +38,11 @@ struct SearchContentView<Item: AnySearchableItem & Identifiable>: View {
             
             VStack {
                navContent
-                  .padding(EdgeInsets(top: 15, leading: 20, bottom: 15, trailing: 15))
+                  .padding(15)
                
                mainView
             }
          }
-      }
       .background(Color.white)
       .navigationBarHidden(true)
    }
@@ -62,14 +60,13 @@ private extension SearchContentView {
          Button {
             handleDismiss()
          } label: {
-            Image("arrow.left")
+             Image(systemName: "arrow.left")
                .resizable()
                .scaledToFit()
                .frame(width: 25, height: 25)
                .padding(8)
                .background(Color.orange)
                .clipShape(Circle())
-               .frame(width: 25, height: 25)
          }
          
          Spacer()

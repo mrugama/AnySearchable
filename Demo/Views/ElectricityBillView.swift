@@ -55,7 +55,7 @@ private extension ElectricityBillView {
             Button {
                 handleDismiss()
             } label: {
-                Image("arrow.left")
+                Image(systemName: "arrow.left")
                     .resizable()
                     .scaledToFit()
                     .frame(width: 25, height: 25)
@@ -121,5 +121,5 @@ private extension ElectricityBillView {
 }
 
 #Preview {
-    ElectricityBillView(viewModel: PaymentViewModelImpl.init())
+    ElectricityBillView(viewModel: .init())
 }
