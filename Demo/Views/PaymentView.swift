@@ -30,7 +30,11 @@ struct ActionKeyModel: Identifiable {
     }
 }
 
-final class PaymentViewModel: Observable {
+final class PaymentViewModel: ObservableObject {
+    
+    @Published var displayedAmount: String = ""
+    private var isPunctuationActived: Bool = false
+    
     var keys: [ActionKeyModel] = [
         ActionKeyModel(action: .numeric(1)),
         ActionKeyModel(action: .numeric(2)),
@@ -52,11 +56,30 @@ final class PaymentViewModel: Observable {
         GridItem(.flexible()),
         GridItem(.flexible())
     ]
+    
+    func performAction(_ action: ActionKey) {
+        switch action {
+        case .numeric(let num):
+            displayedAmount.append(String(num))
+        case .decimal:
+            if isPunctuationActived { return }
+            if displayedAmount.isEmpty {
+                displayedAmount.append("0.")
+            } else {
+                displayedAmount.append(".")
+            }
+            isPunctuationActived.toggle()
+        case .delete:
+            let lastDigit = displayedAmount.removeLast()
+            if lastDigit == "." {
+                isPunctuationActived = false
+            }
+        }
+    }
 }
 
 struct PaymentView: View {
-    let viewModel = PaymentViewModel()
-    @State var amount: String = ""
+    @ObservedObject var viewModel = PaymentViewModel()
     var body: some View {
         ZStack(alignment: .bottom) {
             VStack {
@@ -65,16 +88,8 @@ struct PaymentView: View {
                     columnSpec: viewModel.columnSpec,
                     rowSpec: viewModel.rowSpec,
                     keys: viewModel.keys
-                ) { key in
-                    switch key.action {
-                    case .numeric(let num):
-                        let input = String(num)
-                        amount.append(input)
-                    case .decimal:
-                        amount.append(".")
-                    case .delete:
-                        amount.removeLast()
-                    }
+                ) { action in
+                    viewModel.performAction(action)
                 }
             }
             .padding()
@@ -88,7 +103,7 @@ struct PaymentView: View {
             HStack(spacing: 12) {
                 Text("US$")
                     .fontWeight(.bold)
-                Text(amount.isEmpty ? "0.00":amount)
+                Text(viewModel.displayedAmount.isEmpty ? "0.00" : viewModel.displayedAmount)
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding()
@@ -104,12 +119,12 @@ struct KeyPadView: View {
     let columnSpec: [GridItem]
     let rowSpec: [GridItem]
     let keys: [ActionKeyModel]
-    var action: (ActionKeyModel) -> ()
+    var action: (ActionKey) -> ()
     var body: some View {
         LazyVGrid(columns: columnSpec, spacing: 12) {
             ForEach(keys) { key in
                 Button(action: {
-                    action(key)
+                    action(key())
                 }, label: {
                     Text(key.value)
                         .frame(maxWidth: .infinity)
