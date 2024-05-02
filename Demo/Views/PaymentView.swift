@@ -16,46 +16,30 @@ struct KeyModel: Identifiable {
     let action: KeyAction
     var value: String {
         switch action {
-        case .numeric(let num):
-            String(num)
-        case .decimal:
-            "."
-        case .delete:
-            "delete.left"
+        case .numeric(let num): String(num)
+        case .decimal: "."
+        case .delete: "delete.left"
         }
     }
     
-    func callAsFunction() -> KeyAction {
-        return action
-    }
+    func callAsFunction() -> KeyAction { return action }
 }
 
 final class PaymentViewModel: ObservableObject {
-    
     @Published var displayedAmount: String = ""
     private var isPunctuationActived: Bool = false
     
     var keys: [KeyModel] = [
-        KeyModel(action: .numeric(1)),
-        KeyModel(action: .numeric(2)),
-        KeyModel(action: .numeric(3)),
-        KeyModel(action: .numeric(4)),
-        KeyModel(action: .numeric(5)),
-        KeyModel(action: .numeric(6)),
-        KeyModel(action: .numeric(7)),
-        KeyModel(action: .numeric(8)),
-        KeyModel(action: .numeric(9)),
-        KeyModel(action: .decimal),
-        KeyModel(action: .numeric(0)),
-        KeyModel(action: .delete)
+        KeyModel(action: .numeric(1)), KeyModel(action: .numeric(2)),
+        KeyModel(action: .numeric(3)), KeyModel(action: .numeric(4)),
+        KeyModel(action: .numeric(5)), KeyModel(action: .numeric(6)),
+        KeyModel(action: .numeric(7)), KeyModel(action: .numeric(8)),
+        KeyModel(action: .numeric(9)), KeyModel(action: .decimal),
+        KeyModel(action: .numeric(0)), KeyModel(action: .delete)
     ]
     
     let columnSpec = [GridItem(.adaptive(minimum: 100))]
-    let rowSpec = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    let rowSpec = Array(repeating: GridItem(.flexible()), count: 3)
     
     func performAction(_ action: KeyAction) {
         switch action {
@@ -63,18 +47,15 @@ final class PaymentViewModel: ObservableObject {
             displayedAmount.append(String(num))
         case .decimal:
             guard !isPunctuationActived else { return }
-            if displayedAmount.isEmpty {
-                displayedAmount.append("0.")
-            } else {
-                displayedAmount.append(".")
-            }
+            
+            if displayedAmount.isEmpty { displayedAmount.append("0.") }
+            else { displayedAmount.append(".") }
+            
             isPunctuationActived.toggle()
         case .delete:
             guard !displayedAmount.isEmpty else { return }
             let lastDigit = displayedAmount.removeLast()
-            if lastDigit == "." {
-                isPunctuationActived = false
-            }
+            if lastDigit == "." { isPunctuationActived = false }
         }
     }
 }
