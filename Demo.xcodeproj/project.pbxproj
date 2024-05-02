@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E5D41E0E2BE27C6A00F2DA30 /* PaymentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5D41E0D2BE27C6A00F2DA30 /* PaymentView.swift */; };
 		FAB2E4B12BDAA1B700E7BA70 /* DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4B02BDAA1B700E7BA70 /* DemoApp.swift */; };
 		FAB2E4B32BDAA1B700E7BA70 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB2E4B22BDAA1B700E7BA70 /* ContentView.swift */; };
 		FAB2E4B52BDAA1BA00E7BA70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAB2E4B42BDAA1BA00E7BA70 /* Assets.xcassets */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E5D41E0D2BE27C6A00F2DA30 /* PaymentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentView.swift; sourceTree = "<group>"; };
 		FAB2E4AD2BDAA1B700E7BA70 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAB2E4B02BDAA1B700E7BA70 /* DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoApp.swift; sourceTree = "<group>"; };
 		FAB2E4B22BDAA1B700E7BA70 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				FAB2E4C82BDAA62F00E7BA70 /* ElectricityBillView.swift */,
+				E5D41E0D2BE27C6A00F2DA30 /* PaymentView.swift */,
 				FAB2E4BE2BDAA20F00E7BA70 /* PayHomeView.swift */,
 			);
 			path = Views;
@@ -285,6 +288,7 @@
 				FAB2E4E32BDAAA9E00E7BA70 /* Code+.swift in Sources */,
 				FAB2E4C32BDAA2EF00E7BA70 /* IPaymentViewModel.swift in Sources */,
 				FAB2E4DB2BDAA9FA00E7BA70 /* PaymentRemoteDatasourceImpl.swift in Sources */,
+				E5D41E0E2BE27C6A00F2DA30 /* PaymentView.swift in Sources */,
 				FAB2E4D92BDAA96A00E7BA70 /* BaseButton.swift in Sources */,
 				FAB2E4C12BDAA29A00E7BA70 /* PaymentViewModelImpl.swift in Sources */,
 				FAB2E4CD2BDAA6D700E7BA70 /* AnySearchableItem.swift in Sources */,
