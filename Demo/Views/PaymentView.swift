@@ -85,10 +85,14 @@ struct PaymentView: View {
         VStack {
             Text("Enter Amount")
                 .font(.body)
-            Text(amount)
-                .font(.headline)
-                .fontWeight(.bold)
-                .padding()
+            HStack(spacing: 12) {
+                Text("US$")
+                    .fontWeight(.bold)
+                Text(amount.isEmpty ? "0.00":amount)
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .padding()
+            }
             Text("Deposit will be made from your naira account")
                 .font(.caption)
         }
