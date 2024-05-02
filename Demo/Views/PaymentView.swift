@@ -11,7 +11,7 @@ enum ActionKey {
     case numeric(Int), decimal, delete
 }
 
-struct ActionKeyModel: Identifiable {
+struct KeyModel: Identifiable {
     let id = UUID().uuidString
     let action: ActionKey
     var value: String {
@@ -35,19 +35,19 @@ final class PaymentViewModel: ObservableObject {
     @Published var displayedAmount: String = ""
     private var isPunctuationActived: Bool = false
     
-    var keys: [ActionKeyModel] = [
-        ActionKeyModel(action: .numeric(1)),
-        ActionKeyModel(action: .numeric(2)),
-        ActionKeyModel(action: .numeric(3)),
-        ActionKeyModel(action: .numeric(4)),
-        ActionKeyModel(action: .numeric(5)),
-        ActionKeyModel(action: .numeric(6)),
-        ActionKeyModel(action: .numeric(7)),
-        ActionKeyModel(action: .numeric(8)),
-        ActionKeyModel(action: .numeric(9)),
-        ActionKeyModel(action: .decimal),
-        ActionKeyModel(action: .numeric(0)),
-        ActionKeyModel(action: .delete)
+    var keys: [KeyModel] = [
+        KeyModel(action: .numeric(1)),
+        KeyModel(action: .numeric(2)),
+        KeyModel(action: .numeric(3)),
+        KeyModel(action: .numeric(4)),
+        KeyModel(action: .numeric(5)),
+        KeyModel(action: .numeric(6)),
+        KeyModel(action: .numeric(7)),
+        KeyModel(action: .numeric(8)),
+        KeyModel(action: .numeric(9)),
+        KeyModel(action: .decimal),
+        KeyModel(action: .numeric(0)),
+        KeyModel(action: .delete)
     ]
     
     let columnSpec = [GridItem(.adaptive(minimum: 100))]
@@ -118,7 +118,7 @@ struct PaymentView: View {
 struct KeyPadView: View {
     let columnSpec: [GridItem]
     let rowSpec: [GridItem]
-    let keys: [ActionKeyModel]
+    let keys: [KeyModel]
     var action: (ActionKey) -> ()
     var body: some View {
         LazyVGrid(columns: columnSpec, spacing: 12) {
