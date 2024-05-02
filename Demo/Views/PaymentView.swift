@@ -62,7 +62,7 @@ final class PaymentViewModel: ObservableObject {
         case .numeric(let num):
             displayedAmount.append(String(num))
         case .decimal:
-            if isPunctuationActived { return }
+            guard !isPunctuationActived else { return }
             if displayedAmount.isEmpty {
                 displayedAmount.append("0.")
             } else {
