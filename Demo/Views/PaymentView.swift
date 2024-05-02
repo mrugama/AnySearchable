@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum ActionKey {
+enum ActionKey: Equatable {
     case numeric(Int), decimal, delete
 }
 
@@ -21,7 +21,7 @@ struct KeyModel: Identifiable {
         case .decimal:
             "."
         case .delete:
-            "􀆛"
+            "delete.left"
         }
     }
     
@@ -70,6 +70,7 @@ final class PaymentViewModel: ObservableObject {
             }
             isPunctuationActived.toggle()
         case .delete:
+            guard !displayedAmount.isEmpty else { return }
             let lastDigit = displayedAmount.removeLast()
             if lastDigit == "." {
                 isPunctuationActived = false
@@ -126,16 +127,23 @@ struct KeyPadView: View {
                 Button(action: {
                     action(key())
                 }, label: {
-                    Text(key.value)
-                        .frame(maxWidth: .infinity)
-                        .padding([.top, .bottom], 20)
-                        .background(.secondary.opacity(0.3))
-                        .foregroundColor(.blue)
-                        .fontWeight(.bold)
-                        .clipShape(RoundedRectangle(cornerSize: .init(width: 15.0, height: 5.0)))
+                    if key.action == ActionKey.delete {
+                        decorateKeyView(Image(systemName: key.value))
+                    } else {
+                        decorateKeyView(Text(key.value))
+                    }
                 })
             }
         }
+    }
+    
+    private func decorateKeyView(_ view: some View) -> some View {
+        view
+            .frame(maxWidth: .infinity)
+            .padding([.top, .bottom], 20)
+            .background(.secondary.opacity(0.3))
+            .fontWeight(.bold)
+            .clipShape(RoundedRectangle(cornerSize: .init(width: 15.0, height: 5.0)))
     }
 }
 
