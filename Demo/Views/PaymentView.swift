@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-enum ActionKey: Equatable {
+enum KeyAction: Equatable {
     case numeric(Int), decimal, delete
 }
 
 struct KeyModel: Identifiable {
     let id = UUID().uuidString
-    let action: ActionKey
+    let action: KeyAction
     var value: String {
         switch action {
         case .numeric(let num):
@@ -25,7 +25,7 @@ struct KeyModel: Identifiable {
         }
     }
     
-    func callAsFunction() -> ActionKey {
+    func callAsFunction() -> KeyAction {
         return action
     }
 }
@@ -57,7 +57,7 @@ final class PaymentViewModel: ObservableObject {
         GridItem(.flexible())
     ]
     
-    func performAction(_ action: ActionKey) {
+    func performAction(_ action: KeyAction) {
         switch action {
         case .numeric(let num):
             displayedAmount.append(String(num))
@@ -120,14 +120,14 @@ struct KeyPadView: View {
     let columnSpec: [GridItem]
     let rowSpec: [GridItem]
     let keys: [KeyModel]
-    var action: (ActionKey) -> ()
+    var action: (KeyAction) -> ()
     var body: some View {
         LazyVGrid(columns: columnSpec, spacing: 12) {
             ForEach(keys) { key in
                 Button(action: {
                     action(key())
                 }, label: {
-                    if key.action == ActionKey.delete {
+                    if key.action == KeyAction.delete {
                         decorateKeyView(Image(systemName: key.value))
                     } else {
                         decorateKeyView(Text(key.value))
