@@ -27,6 +27,9 @@ struct KeyModel: Identifiable {
 
 final class PaymentViewModel: ObservableObject {
     @Published var displayedAmount: String = ""
+    private var amount: Double {
+        Double(displayedAmount) ?? 0.00
+    }
     private var isPunctuationActived: Bool = false
     
     var keys: [KeyModel] = [
@@ -44,16 +47,20 @@ final class PaymentViewModel: ObservableObject {
     func performAction(_ action: KeyAction) {
         switch action {
         case .numeric(let num):
+            if let previousInput = displayedAmount.last,
+                previousInput == "0" &&
+                num == 0 &&
+                !isPunctuationActived { return } // Early exit to prevent more than one zero
             displayedAmount.append(String(num))
         case .decimal:
-            guard !isPunctuationActived else { return }
+            guard !isPunctuationActived else { return } // Early exit when punctuation is already activated
             
             if displayedAmount.isEmpty { displayedAmount.append("0.") }
             else { displayedAmount.append(".") }
             
             isPunctuationActived.toggle()
         case .delete:
-            guard !displayedAmount.isEmpty else { return }
+            guard !displayedAmount.isEmpty else { return } // Early exit to prevent crash when remove empty
             let lastDigit = displayedAmount.removeLast()
             if lastDigit == "." { isPunctuationActived = false }
         }
