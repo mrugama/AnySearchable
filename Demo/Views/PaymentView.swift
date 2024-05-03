@@ -41,8 +41,7 @@ final class PaymentViewModel: ObservableObject {
         KeyModel(action: .numeric(0)), KeyModel(action: .delete)
     ]
     
-    let columnSpec = [GridItem(.adaptive(minimum: 100))]
-    let rowSpec = Array(repeating: GridItem(.flexible()), count: 3)
+    let columnSpec = Array(repeating: GridItem(.flexible()), count: 3)
     
     func performAction(_ action: KeyAction) {
         switch action {
@@ -75,7 +74,6 @@ struct PaymentView: View {
                 displayAmountView
                 KeyPadView(
                     columnSpec: viewModel.columnSpec,
-                    rowSpec: viewModel.rowSpec,
                     keys: viewModel.keys
                 ) { action in
                     viewModel.performAction(action)
@@ -106,7 +104,6 @@ struct PaymentView: View {
 
 struct KeyPadView: View {
     let columnSpec: [GridItem]
-    let rowSpec: [GridItem]
     let keys: [KeyModel]
     var action: (KeyAction) -> ()
     var body: some View {
